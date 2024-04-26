@@ -1,0 +1,11 @@
+RewriteEngine on
+
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule ^note/(\d+)$ index.php?pag=note&id=$1 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?pag=$1 [QSA,L]
+
+DirectoryIndex index.php order deny, allow
