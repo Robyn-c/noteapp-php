@@ -1,11 +1,21 @@
-RewriteEngine on
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
+    RewriteEngine On
 
-RewriteCond %{REQUEST_FILENAME} !-f 
-RewriteCond %{REQUEST_FILENAME} !-d 
-RewriteRule ^note/(\d+)$ index.php?pag=note&id=$1 [QSA,L]
-RewriteCond %{REQUEST_FILENAME} !-f 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?pag=$1 [QSA,L]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-DirectoryIndex index.php order deny, allow
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

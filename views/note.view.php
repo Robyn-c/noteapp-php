@@ -12,22 +12,14 @@
     <!-- Heading -->
     <?php require('partials/heading.php') ?>
 
-  <main class="py-20 md:py-0 p-4 list-unstyled">
-    <div class="py-6 flex flex-col gap-6">
-      <ul>
-      <?php foreach($notes as $note): ?>
-        <li>
-          <a class="text-blue-700" href="/note?id=<?= htmlspecialchars($note['id']) ?>">
-            <?= $note['body'] ?>
-        </li>
-      <?php endforeach ?>
-      </ul>
-      <a href="/notes/create">
-        <button class="px-4 py-2 bg-blue-500 rounded-md text-white">
-          Create Note
-        </button>  
-      </a>
-    </div>
+  <main class="py-20 md:py-0">
+  
+      <a class="text-blue-800 font-bold" href="/notes">Go Back</a>
+
+      <li class="mt-6">
+          <?= htmlspecialchars($note['body']) ?>
+      </li>
+    
   </main>
   <!-- Footer -->
   <?php require('partials/footer.php') ?>
